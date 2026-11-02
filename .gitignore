@@ -1,0 +1,61 @@
+### Build and Target Directories ###
+target/
+build/
+out/
+bin/
+.gradle/
+.m2/
+
+### Java and Package Files ###
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+
+### Build Tool Wrappers ###
+# Keep the wrapper scripts, but you can ignore timing logs
+.mvn/timing.properties
+.gradletasknamecache
+
+# IMPORTANT: Ensure the Maven wrapper jar itself is NOT ignored if you use it
+!/.mvn/wrapper/maven-wrapper.jar
+!/gradle/wrapper/gradle-wrapper.jar
+
+### IDE Settings (IntelliJ IDEA) ###
+.idea/
+*.iml
+*.ipr
+*.iws
+
+### IDE Settings (Eclipse / STS) ###
+.metadata
+.classpath
+.project
+.settings/
+.springBeans
+.sts4-cache/
+.factorypath
+.apt_generated
+*.launch
+
+### IDE Settings (VS Code) ###
+.vscode/
+
+### Environment Variables & Sensitive Configs ###
+.env
+.env.*
+# Optional: Uncomment if you use separate local/dev properties with credentials
+# application-local.properties
+# application-dev.properties
+
+### Logs and OS Files ###
+*.log
+logs/
+.DS_Store
+Thumbs.db
+Desktop.ini
