@@ -1,13 +1,14 @@
 services:
-  api:
-    build: ./backend
-    ports:
-      - "5000:8080" # host, container
-    environment:
-      ConnectionStrings__Default: "Host=db;Port=5432;Database=apidb;Username=postgres;Password=postgres"
-    depends_on:
-      db:
-        condition: service_healthy
+  # api:
+  #   build: ./backend
+  #   ports:
+  #     - "5000:8080" # host, container
+  #   environment:
+  #     ASPNETCORE_ENVIRONMENT: Development # remove for prod
+  #     ConnectionStrings__Default: "Host=db;Port=5432;Database=apidb;Username=postgres;Password=postgres"
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
 
   db:
     image: postgres:18
