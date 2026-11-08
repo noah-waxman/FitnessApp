@@ -5,31 +5,28 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.logit.logitapi.entities.Users;
+import com.logit.logitapi.entities.User;
 import com.logit.logitapi.requests.CreateUserRequest;
-import com.logit.logitapi.services.UsersService;
+import com.logit.logitapi.services.UserService;
 import com.logit.logitapi.requests.CreateUserRequest;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-public class UsersController {
+public class UserController {
     @Autowired
-    private UsersService usersService;
+    private UserService userService;
 
     @GetMapping("/getAll")
-    public List<Users> getAllUsers() {
-        return usersService.findAll();
+    public List<User> getAllUsers() {
+        return userService.findAll();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Users create(@RequestBody CreateUserRequest request) {
-        Users user = new Users();
-        user.setEmail(request.getEmail());
-        user.setPasswordHash(request.getPassword());
-        return usersService.save(user);
+    public User create(@RequestBody CreateUserRequest request) {
+        return userService.createUser(request.getEmail(), request.getPassword());
     }
 }
 

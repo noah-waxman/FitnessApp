@@ -1,13 +1,12 @@
 package com.logit.logitapi.entities;
 
 import jakarta.persistence.*;
-import org.mindrot.jbcrypt.BCrypt;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="Users")
-public class Users {
+public class User {
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,7 +19,10 @@ public class Users {
     @Column(nullable = false, unique = true)
     private String passwordHash;
 
-    public Users () {}
+    @Column(nullable = false)
+    private String timezone;
+
+    public User () {}
 
     public Long getId() {
         return id;
@@ -38,8 +40,15 @@ public class Users {
         return passwordHash;
     }
 
-    public void setPasswordHash(String password) {
-        String secureHash = BCrypt.hashpw(password, BCrypt.gensalt(12));
-        this.passwordHash = secureHash;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public String getTimezone() {
+        return timezone;
+    }
+
+    public void setTimezone(String timezone) {
+        this.timezone = timezone;
     }
 }
