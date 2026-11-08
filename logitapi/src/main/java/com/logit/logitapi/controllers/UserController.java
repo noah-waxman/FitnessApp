@@ -26,7 +26,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public User create(@RequestBody CreateUserRequest request) {
-        return userService.createUser(request.getEmail(), request.getPassword());
+        return userService.createUser(request.getEmail(), request.getPassword(), request.getTimezone());
     }
 }
 

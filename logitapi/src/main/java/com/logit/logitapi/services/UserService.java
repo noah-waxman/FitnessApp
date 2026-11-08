@@ -23,7 +23,7 @@ public class UserService {
         return userRepo.findAll();
     }
 
-    public User createUser(String email, String rawPassword) {
+    public User createUser(String email, String rawPassword, String timezone) {
         if (userRepo.existsByEmail(email)) {
             throw new EmailAlreadyExistsException("Email already exists");
         }
@@ -32,6 +32,7 @@ public class UserService {
         String secureHash = BCrypt.hashpw(rawPassword, BCrypt.gensalt(12));
         user.setEmail(email);
         user.setPasswordHash(secureHash);
+        user.setTimezone(timezone);
         return userRepo.save(user);
     }
 }

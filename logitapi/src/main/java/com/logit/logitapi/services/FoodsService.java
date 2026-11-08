@@ -1,0 +1,61 @@
+package com.logit.logitapi.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.logit.logitapi.entities.Foods;
+import com.logit.logitapi.entities.User;
+import com.logit.logitapi.exceptions.UserNotFoundException;
+import com.logit.logitapi.repositories.FoodsRepo;
+import com.logit.logitapi.repositories.UserRepo;
+
+@Service 
+public class FoodsService {
+    @Autowired
+    private FoodsRepo foodsRepo;
+
+    @Autowired
+    private UserRepo userRepo;
+
+    public List<Foods> findAll() {
+        return foodsRepo.findAll();
+    }
+
+    public Foods createFood(Long userId, String name, String brand, Float caloriesPerGram, Float proteinPerGram, Float carbsPerGram, Float fatPerGram) {
+        Foods food = new Foods();
+
+        User user = userRepo.findById(userId).orElseThrow(
+            () -> new UserNotFoundException("User Not Found")
+        );
+
+        food.setUser(user);
+
+        if (name != null && !name.isBlank()) {
+            food.setName(name);
+        }
+
+        if (brand != null && !brand.isBlank()) {
+            food.setBrand(brand);
+        }
+
+        if (caloriesPerGram != null) {
+            food.setCaloriesPerGram(caloriesPerGram);
+        }
+
+        if (proteinPerGram != null) {
+            food.setProteinPerGram(proteinPerGram);
+        }
+
+        if (carbsPerGram != null) {
+            food.setCarbsPerGram(carbsPerGram);
+        }
+
+        if (fatPerGram != null) {
+            food.setFatPerGram(fatPerGram);
+        }
+
+        return foodsRepo.save(food);
+    }
+}
