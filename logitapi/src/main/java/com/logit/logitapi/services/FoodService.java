@@ -6,23 +6,23 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.logit.logitapi.entities.Foods;
+import com.logit.logitapi.entities.Food;
 import com.logit.logitapi.entities.User;
 import com.logit.logitapi.exceptions.UserNotFoundException;
-import com.logit.logitapi.repositories.FoodsRepo;
+import com.logit.logitapi.repositories.FoodRepo;
 import com.logit.logitapi.repositories.UserRepo;
 import com.logit.logitapi.responses.FoodResponse;
 
 @Service 
-public class FoodsService {
+public class FoodService {
     @Autowired
-    private FoodsRepo foodsRepo;
+    private FoodRepo foodRepo;
 
     @Autowired
     private UserRepo userRepo;
 
-    public List<Foods> findAll() {
-        return foodsRepo.findAll();
+    public List<Food> findAll() {
+        return foodRepo.findAll();
     }
 
     public FoodResponse createFood(Long userId, String name, String brand) {
@@ -30,7 +30,7 @@ public class FoodsService {
             () -> new UserNotFoundException("User Not Found")
         );
         
-        Foods food = new Foods();
+        Food food = new Food();
 
         food.setUser(user);
 
@@ -42,7 +42,7 @@ public class FoodsService {
             food.setBrand(brand);
         }
 
-        foodsRepo.save(food);
+        foodRepo.save(food);
 
         return new FoodResponse(
             food.getId(),

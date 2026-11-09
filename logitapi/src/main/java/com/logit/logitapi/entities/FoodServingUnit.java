@@ -17,7 +17,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity 
-@Table(name = "Food_Serving_Unit")
+@Table(name = "Food_Serving_Units")
 public class FoodServingUnit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,7 @@ public class FoodServingUnit {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "food_id", nullable = false)
-    private Foods food;
+    private Food food;
 
     @Column(nullable = false)
     private String unitName;
@@ -64,11 +64,11 @@ public class FoodServingUnit {
         this.id = id;
     }
 
-    public Foods getFood() {
+    public Food getFood() {
         return food;
     }
 
-    public void setFood(Foods food) {
+    public void setFood(Food food) {
         this.food = food;
     }
 

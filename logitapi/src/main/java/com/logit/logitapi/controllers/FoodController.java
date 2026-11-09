@@ -11,27 +11,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.logit.logitapi.entities.Foods;
+import com.logit.logitapi.entities.Food;
 import com.logit.logitapi.requests.CreateFoodsRequest;
 import com.logit.logitapi.requests.CreateUserRequest;
 import com.logit.logitapi.responses.FoodResponse;
-import com.logit.logitapi.services.FoodsService;
+import com.logit.logitapi.services.FoodService;
 
 @RestController 
-@RequestMapping("/foods")
-public class FoodsController {
+@RequestMapping("/food")
+public class FoodController {
     @Autowired 
-    private FoodsService foodsService;
+    private FoodService foodService;
 
     @GetMapping("/getAll")
-    public List<Foods> getAllUsers() {
-        return foodsService.findAll();
+    public List<Food> getAllUsers() {
+        return foodService.findAll();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public FoodResponse create(@RequestBody CreateFoodsRequest request) {
-        return foodsService.createFood(
+        return foodService.createFood(
             request.getUserId(),
             request.getName(),
             request.getBrand()

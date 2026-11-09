@@ -7,18 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.logit.logitapi.entities.FoodServingUnit;
-import com.logit.logitapi.entities.Foods;
+import com.logit.logitapi.entities.Food;
 import com.logit.logitapi.entities.User;
 import com.logit.logitapi.exceptions.FoodNotFoundException;
 import com.logit.logitapi.exceptions.UserNotFoundException;
 import com.logit.logitapi.repositories.FoodServingUnitRepo;
-import com.logit.logitapi.repositories.FoodsRepo;
+import com.logit.logitapi.repositories.FoodRepo;
 import com.logit.logitapi.repositories.UserRepo;
 
 @Service 
 public class FoodServingUnitService {
     @Autowired
-    private FoodsRepo foodsRepo;
+    private FoodRepo foodRepo;
 
     @Autowired
     private FoodServingUnitRepo foodServingUnitRepo;
@@ -37,7 +37,7 @@ public class FoodServingUnitService {
         BigDecimal gramsPerUnit,
         Boolean isDefault
     ) {
-        Foods food = foodsRepo.findById(foodId).orElseThrow(
+        Food food = foodRepo.findById(foodId).orElseThrow(
             () -> new FoodNotFoundException("Food not found")
         );
 

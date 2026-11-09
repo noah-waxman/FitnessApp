@@ -18,7 +18,7 @@ import jakarta.persistence.Table;
 
 @Entity 
 @Table (name="Foods")
-public class Foods {
+public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,7 +40,7 @@ public class Foods {
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
-    public Foods () {}
+    public Food () {}
 
     // Getters and Setters
     

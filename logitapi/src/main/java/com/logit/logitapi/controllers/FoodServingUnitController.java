@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.logit.logitapi.entities.FoodServingUnit;
-import com.logit.logitapi.entities.Foods;
+import com.logit.logitapi.entities.Food;
 import com.logit.logitapi.requests.CreateFoodServingUnitRequest;
 import com.logit.logitapi.requests.CreateFoodsRequest;
 import com.logit.logitapi.requests.CreateUserRequest;
 import com.logit.logitapi.services.FoodServingUnitService;
-import com.logit.logitapi.services.FoodsService;
+import com.logit.logitapi.services.FoodService;
 
 @RestController 
 @RequestMapping("/food_serving_unit")
