@@ -33,18 +33,6 @@ public class Foods {
     @Column(nullable = true)
     private String brand;
 
-    @Column(nullable = true)
-    private BigDecimal caloriesPerGram;
-
-    @Column(nullable = true)
-    private BigDecimal proteinPerGram;
-
-    @Column(nullable = true)
-    private BigDecimal carbsPerGram;
-
-    @Column(nullable = true)
-    private BigDecimal fatPerGram;
-
     @Column
     private Boolean isArchived = false;
 
@@ -82,38 +70,6 @@ public class Foods {
 
     public void setBrand(String brand) {
         this.brand = brand;
-    }
-
-    public BigDecimal getCaloriesPerGram() {
-        return caloriesPerGram;
-    }
-
-    public void setCaloriesPerGram(BigDecimal caloriesPerGram) {
-        this.caloriesPerGram = caloriesPerGram;
-    }
-
-    public BigDecimal getProteinPerGram() {
-        return proteinPerGram;
-    }
-
-    public void setProteinPerGram(BigDecimal proteinPerGram) {
-        this.proteinPerGram = proteinPerGram;
-    }
-
-    public BigDecimal getCarbsPerGram() {
-        return carbsPerGram;
-    }
-
-    public void setCarbsPerGram(BigDecimal carbsPerGram) {
-        this.carbsPerGram = carbsPerGram;
-    }
-
-    public BigDecimal getFatPerGram() {
-        return fatPerGram;
-    }
-
-    public void setFatPerGram(BigDecimal fatPerGram) {
-        this.fatPerGram = fatPerGram;
     }
 
     public Instant getCreatedAt() {

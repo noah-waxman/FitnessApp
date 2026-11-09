@@ -25,7 +25,7 @@ public class FoodsService {
         return foodsRepo.findAll();
     }
 
-    public FoodResponse createFood(Long userId, String name, String brand, BigDecimal caloriesPerGram, BigDecimal proteinPerGram, BigDecimal carbsPerGram, BigDecimal fatPerGram) {
+    public FoodResponse createFood(Long userId, String name, String brand) {
         User user = userRepo.findById(userId).orElseThrow(
             () -> new UserNotFoundException("User Not Found")
         );
@@ -42,32 +42,12 @@ public class FoodsService {
             food.setBrand(brand);
         }
 
-        if (caloriesPerGram != null) {
-            food.setCaloriesPerGram(caloriesPerGram);
-        }
-
-        if (proteinPerGram != null) {
-            food.setProteinPerGram(proteinPerGram);
-        }
-
-        if (carbsPerGram != null) {
-            food.setCarbsPerGram(carbsPerGram);
-        }
-
-        if (fatPerGram != null) {
-            food.setFatPerGram(fatPerGram);
-        }
-
         foodsRepo.save(food);
 
         return new FoodResponse(
             food.getId(),
             food.getName(),
-            food.getBrand(),
-            food.getCaloriesPerGram(),
-            food.getProteinPerGram(),
-            food.getCarbsPerGram(),
-            food.getFatPerGram()
+            food.getBrand()
         );
     }
 }

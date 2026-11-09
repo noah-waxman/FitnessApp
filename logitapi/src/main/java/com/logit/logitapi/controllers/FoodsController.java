@@ -34,11 +34,7 @@ public class FoodsController {
         return foodsService.createFood(
             request.getUserId(),
             request.getName(),
-            request.getBrand(),
-            request.getCaloriesPerGram(),
-            request.getProteinPerGram(),
-            request.getCarbsPerGram(),
-            request.getFatPerGram()
+            request.getBrand()
         );
     }
 }
