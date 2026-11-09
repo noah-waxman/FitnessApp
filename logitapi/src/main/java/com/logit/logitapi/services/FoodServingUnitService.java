@@ -1,5 +1,6 @@
 package com.logit.logitapi.services;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +30,11 @@ public class FoodServingUnitService {
     public FoodServingUnit createFoodServingUnit(
         Long foodId,
         String unitName,
-        Float caloriesPerUnit,
-        Float proteinPerUnit,
-        Float carbsPerUnit,
-        Float fatPerUnit,
-        Float gramsPerUnit,
+        BigDecimal caloriesPerUnit,
+        BigDecimal proteinPerUnit,
+        BigDecimal carbsPerUnit,
+        BigDecimal fatPerUnit,
+        BigDecimal gramsPerUnit,
         Boolean isDefault
     ) {
         Foods food = foodsRepo.findById(foodId).orElseThrow(

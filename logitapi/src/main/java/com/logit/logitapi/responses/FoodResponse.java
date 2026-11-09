@@ -1,11 +1,13 @@
 package com.logit.logitapi.responses;
 
+import java.math.BigDecimal;
+
 public record FoodResponse(
     Long id,
     String name,
     String brand,
-    Float caloriesPerGram,
-    Float proteinPerGram,
-    Float carbsPerGram,
-    Float fatPerGram
+    BigDecimal caloriesPerGram,
+    BigDecimal proteinPerGram,
+    BigDecimal carbsPerGram,
+    BigDecimal fatPerGram
 ) {}

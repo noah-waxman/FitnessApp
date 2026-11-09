@@ -1,13 +1,15 @@
 package com.logit.logitapi.requests;
 
+import java.math.BigDecimal;
+
 public class CreateFoodServingUnitRequest {
     private Long foodId;
     private String unitName;
-    private Float caloriesPerUnit;
-    private Float proteinPerUnit;
-    private Float carbsPerUnit;
-    private Float fatPerUnit;
-    private Float gramsPerUnit;
+    private BigDecimal caloriesPerUnit;
+    private BigDecimal proteinPerUnit;
+    private BigDecimal carbsPerUnit;
+    private BigDecimal fatPerUnit;
+    private BigDecimal gramsPerUnit;
     private Boolean isDefault = false;
 
     // Getters and Setters
@@ -28,43 +30,43 @@ public class CreateFoodServingUnitRequest {
         this.unitName = unitName;
     }
 
-    public Float getCaloriesPerUnit() {
+    public BigDecimal getCaloriesPerUnit() {
         return caloriesPerUnit;
     }
 
-    public void setCaloriesPerUnit(Float caloriesPerUnit) {
+    public void setCaloriesPerUnit(BigDecimal caloriesPerUnit) {
         this.caloriesPerUnit = caloriesPerUnit;
     }
 
-    public Float getProteinPerUnit() {
+    public BigDecimal getProteinPerUnit() {
         return proteinPerUnit;
     }
 
-    public void setProteinPerUnit(Float proteinPerUnit) {
+    public void setProteinPerUnit(BigDecimal proteinPerUnit) {
         this.proteinPerUnit = proteinPerUnit;
     }
 
-    public Float getCarbsPerUnit() {
+    public BigDecimal getCarbsPerUnit() {
         return carbsPerUnit;
     }
 
-    public void setCarbsPerUnit(Float carbsPerUnit) {
+    public void setCarbsPerUnit(BigDecimal carbsPerUnit) {
         this.carbsPerUnit = carbsPerUnit;
     }
 
-    public Float getFatPerUnit() {
+    public BigDecimal getFatPerUnit() {
         return fatPerUnit;
     }
 
-    public void setFatPerUnit(Float fatPerUnit) {
+    public void setFatPerUnit(BigDecimal fatPerUnit) {
         this.fatPerUnit = fatPerUnit;
     }
 
-    public Float getGramsPerUnit() {
+    public BigDecimal getGramsPerUnit() {
         return gramsPerUnit;
     }
 
-    public void setGramsPerUnit(Float gramsPerUnit) {
+    public void setGramsPerUnit(BigDecimal gramsPerUnit) {
         this.gramsPerUnit = gramsPerUnit;
     }
 

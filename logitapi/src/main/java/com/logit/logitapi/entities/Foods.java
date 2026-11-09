@@ -1,5 +1,6 @@
 package com.logit.logitapi.entities;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDateTime;
 
@@ -33,16 +34,16 @@ public class Foods {
     private String brand;
 
     @Column(nullable = true)
-    private Float caloriesPerGram;
+    private BigDecimal caloriesPerGram;
 
     @Column(nullable = true)
-    private Float proteinPerGram;
+    private BigDecimal proteinPerGram;
 
     @Column(nullable = true)
-    private Float carbsPerGram;
+    private BigDecimal carbsPerGram;
 
     @Column(nullable = true)
-    private Float fatPerGram;
+    private BigDecimal fatPerGram;
 
     @Column
     private Boolean isArchived = false;
@@ -83,35 +84,35 @@ public class Foods {
         this.brand = brand;
     }
 
-    public Float getCaloriesPerGram() {
+    public BigDecimal getCaloriesPerGram() {
         return caloriesPerGram;
     }
 
-    public void setCaloriesPerGram(Float caloriesPerGram) {
+    public void setCaloriesPerGram(BigDecimal caloriesPerGram) {
         this.caloriesPerGram = caloriesPerGram;
     }
 
-    public Float getProteinPerGram() {
+    public BigDecimal getProteinPerGram() {
         return proteinPerGram;
     }
 
-    public void setProteinPerGram(Float proteinPerGram) {
+    public void setProteinPerGram(BigDecimal proteinPerGram) {
         this.proteinPerGram = proteinPerGram;
     }
 
-    public Float getCarbsPerGram() {
+    public BigDecimal getCarbsPerGram() {
         return carbsPerGram;
     }
 
-    public void setCarbsPerGram(Float carbsPerGram) {
+    public void setCarbsPerGram(BigDecimal carbsPerGram) {
         this.carbsPerGram = carbsPerGram;
     }
 
-    public Float getFatPerGram() {
+    public BigDecimal getFatPerGram() {
         return fatPerGram;
     }
 
-    public void setFatPerGram(Float fatPerGram) {
+    public void setFatPerGram(BigDecimal fatPerGram) {
         this.fatPerGram = fatPerGram;
     }
 

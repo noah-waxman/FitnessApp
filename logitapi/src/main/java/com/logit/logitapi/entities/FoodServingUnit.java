@@ -1,5 +1,6 @@
 package com.logit.logitapi.entities;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDateTime;
 
@@ -30,19 +31,19 @@ public class FoodServingUnit {
     private String unitName;
 
     @Column(nullable = false)
-    private Float caloriesPerUnit;
+    private BigDecimal caloriesPerUnit;
 
     @Column(nullable = true)
-    private Float proteinPerUnit;
+    private BigDecimal proteinPerUnit;
 
     @Column(nullable = true)
-    private Float carbsPerUnit;
+    private BigDecimal carbsPerUnit;
 
     @Column(nullable = true)
-    private Float fatPerUnit;
+    private BigDecimal fatPerUnit;
 
     @Column(nullable = true)
-    private Float gramsPerUnit;
+    private BigDecimal gramsPerUnit;
 
     @Column(nullable = false)
     private Boolean isDefault = false;
@@ -79,43 +80,43 @@ public class FoodServingUnit {
         this.unitName = unitName;
     }
 
-    public Float getCaloriesPerUnit() {
+    public BigDecimal getCaloriesPerUnit() {
         return caloriesPerUnit;
     }
 
-    public void setCaloriesPerUnit(Float caloriesPerUnit) {
+    public void setCaloriesPerUnit(BigDecimal caloriesPerUnit) {
         this.caloriesPerUnit = caloriesPerUnit;
     }
 
-    public Float getProteinPerUnit() {
+    public BigDecimal getProteinPerUnit() {
         return proteinPerUnit;
     }
 
-    public void setProteinPerUnit(Float proteinPerUnit) {
+    public void setProteinPerUnit(BigDecimal proteinPerUnit) {
         this.proteinPerUnit = proteinPerUnit;
     }
 
-    public Float getCarbsPerUnit() {
+    public BigDecimal getCarbsPerUnit() {
         return carbsPerUnit;
     }
 
-    public void setCarbsPerUnit(Float carbsPerUnit) {
+    public void setCarbsPerUnit(BigDecimal carbsPerUnit) {
         this.carbsPerUnit = carbsPerUnit;
     }
 
-    public Float getFatPerUnit() {
+    public BigDecimal getFatPerUnit() {
         return fatPerUnit;
     }
 
-    public void setFatPerUnit(Float fatPerUnit) {
+    public void setFatPerUnit(BigDecimal fatPerUnit) {
         this.fatPerUnit = fatPerUnit;
     }
 
-    public Float getGramsPerUnit() {
+    public BigDecimal getGramsPerUnit() {
         return gramsPerUnit;
     }
 
-    public void setGramsPerUnit(Float gramsPerUnit) {
+    public void setGramsPerUnit(BigDecimal gramsPerUnit) {
         this.gramsPerUnit = gramsPerUnit;
     }
 

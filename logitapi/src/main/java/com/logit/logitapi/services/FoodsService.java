@@ -1,5 +1,6 @@
 package com.logit.logitapi.services;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class FoodsService {
         return foodsRepo.findAll();
     }
 
-    public FoodResponse createFood(Long userId, String name, String brand, Float caloriesPerGram, Float proteinPerGram, Float carbsPerGram, Float fatPerGram) {
+    public FoodResponse createFood(Long userId, String name, String brand, BigDecimal caloriesPerGram, BigDecimal proteinPerGram, BigDecimal carbsPerGram, BigDecimal fatPerGram) {
         User user = userRepo.findById(userId).orElseThrow(
             () -> new UserNotFoundException("User Not Found")
         );
