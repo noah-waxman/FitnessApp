@@ -10,6 +10,7 @@ import com.logit.logitapi.entities.User;
 import com.logit.logitapi.exceptions.UserNotFoundException;
 import com.logit.logitapi.repositories.FoodsRepo;
 import com.logit.logitapi.repositories.UserRepo;
+import com.logit.logitapi.responses.FoodResponse;
 
 @Service 
 public class FoodsService {
@@ -23,12 +24,12 @@ public class FoodsService {
         return foodsRepo.findAll();
     }
 
-    public Foods createFood(Long userId, String name, String brand, Float caloriesPerGram, Float proteinPerGram, Float carbsPerGram, Float fatPerGram) {
-        Foods food = new Foods();
-
+    public FoodResponse createFood(Long userId, String name, String brand, Float caloriesPerGram, Float proteinPerGram, Float carbsPerGram, Float fatPerGram) {
         User user = userRepo.findById(userId).orElseThrow(
             () -> new UserNotFoundException("User Not Found")
         );
+        
+        Foods food = new Foods();
 
         food.setUser(user);
 
@@ -56,6 +57,16 @@ public class FoodsService {
             food.setFatPerGram(fatPerGram);
         }
 
-        return foodsRepo.save(food);
+        foodsRepo.save(food);
+
+        return new FoodResponse(
+            food.getId(),
+            food.getName(),
+            food.getBrand(),
+            food.getCaloriesPerGram(),
+            food.getProteinPerGram(),
+            food.getCarbsPerGram(),
+            food.getFatPerGram()
+        );
     }
 }

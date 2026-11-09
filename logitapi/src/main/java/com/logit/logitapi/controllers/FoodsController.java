@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.logit.logitapi.entities.Foods;
 import com.logit.logitapi.requests.CreateFoodsRequest;
 import com.logit.logitapi.requests.CreateUserRequest;
+import com.logit.logitapi.responses.FoodResponse;
 import com.logit.logitapi.services.FoodsService;
 
 @RestController 
@@ -29,7 +30,7 @@ public class FoodsController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Foods create(@RequestBody CreateFoodsRequest request) {
+    public FoodResponse create(@RequestBody CreateFoodsRequest request) {
         return foodsService.createFood(
             request.getUserId(),
             request.getName(),

@@ -27,4 +27,18 @@ public class GlobalExceptionHandler {
             .status(HttpStatus.NOT_FOUND)
             .body(ex.getMessage());
     }
+
+    @ExceptionHandler(FoodNotFoundException.class)
+    public ResponseEntity<String> handleFoodNotFound(FoodNotFoundException ex) {
+        return ResponseEntity
+            .status(HttpStatus.NOT_FOUND)
+            .body(ex.getMessage());
+    }
+
+    @ExceptionHandler(FoodServingUnitNotFoundException.class)
+    public ResponseEntity<String> handleFoodNotFound(FoodServingUnitNotFoundException ex) {
+        return ResponseEntity
+            .status(HttpStatus.NOT_FOUND)
+            .body(ex.getMessage());
+    }
 }

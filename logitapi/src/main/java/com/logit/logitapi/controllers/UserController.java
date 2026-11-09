@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.logit.logitapi.entities.User;
 import com.logit.logitapi.requests.CreateUserRequest;
+import com.logit.logitapi.responses.UserResponse;
 import com.logit.logitapi.services.UserService;
 import com.logit.logitapi.requests.CreateUserRequest;
 
@@ -25,7 +26,7 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public User create(@RequestBody CreateUserRequest request) {
+    public UserResponse create(@RequestBody CreateUserRequest request) {
         return userService.createUser(request.getEmail(), request.getPassword(), request.getTimezone());
     }
 }

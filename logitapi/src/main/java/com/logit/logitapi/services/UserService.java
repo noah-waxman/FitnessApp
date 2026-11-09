@@ -2,7 +2,9 @@ package com.logit.logitapi.services;
 
 import com.logit.logitapi.entities.User;
 import com.logit.logitapi.exceptions.EmailAlreadyExistsException;
+import com.logit.logitapi.exceptions.UserNotFoundException;
 import com.logit.logitapi.repositories.UserRepo;
+import com.logit.logitapi.responses.UserResponse;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,7 @@ public class UserService {
         return userRepo.findAll();
     }
 
-    public User createUser(String email, String rawPassword, String timezone) {
+    public UserResponse createUser(String email, String rawPassword, String timezone) {
         if (userRepo.existsByEmail(email)) {
             throw new EmailAlreadyExistsException("Email already exists");
         }
@@ -33,7 +35,17 @@ public class UserService {
         user.setEmail(email);
         user.setPasswordHash(secureHash);
         user.setTimezone(timezone);
-        return userRepo.save(user);
+        userRepo.save(user);
+
+        return new UserResponse(user.getId(), user.getEmail(), user.getTimezone());
+    }
+
+    public UserResponse getUser(Long userId) {
+        User user = userRepo.findById(userId).orElseThrow(
+            () -> new UserNotFoundException("User Not Found")
+        );
+
+        return new UserResponse(user.getId(), user.getEmail(), user.getTimezone());
     }
 }
 
