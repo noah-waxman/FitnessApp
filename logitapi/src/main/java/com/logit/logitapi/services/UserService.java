@@ -6,9 +6,14 @@ import com.logit.logitapi.exceptions.UserNotFoundException;
 import com.logit.logitapi.repositories.UserRepo;
 import com.logit.logitapi.responses.UserResponse;
 
+import io.jsonwebtoken.security.Password;
+
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -21,19 +26,24 @@ public class UserService {
     @Autowired 
     private UserRepo userRepo;
 
+    private final PasswordEncoder encoder;
+
+    public UserService(PasswordEncoder encoder) {
+        this.encoder = encoder;
+    }
+
     public List<User> findAll() {
         return userRepo.findAll();
     }
 
-    public UserResponse createUser(String email, String rawPassword, String timezone) {
+    public UserResponse createUser(String email, String password, String timezone) {
         if (userRepo.existsByEmail(email)) {
             throw new EmailAlreadyExistsException("Email already exists");
         }
 
         User user = new User();
-        String secureHash = BCrypt.hashpw(rawPassword, BCrypt.gensalt(12));
         user.setEmail(email);
-        user.setPasswordHash(secureHash);
+        user.setPasswordHash(encoder.encode(password));
         user.setTimezone(timezone);
         userRepo.save(user);
 
