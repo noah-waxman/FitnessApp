@@ -1,0 +1,14 @@
+brew install --cask zulu@17
+brew install --cask android-commandlinetools
+mkdir -p ~/Library/Android/sdk
+
+sdkmanager --sdk_root=$HOME/Library/Android/sdk \
+  "platform-tools" "platforms;android-35" "build-tools;35.0.0
+
+  sdkmanager --sdk_root=$HOME/Library/Android/sdk --licenses
+
+  bash profile
+  export ANDROID_HOME=$HOME/Library/Android/sdk
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
