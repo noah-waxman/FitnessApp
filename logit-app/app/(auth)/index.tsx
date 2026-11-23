@@ -28,7 +28,12 @@ export default function LoginRegisterScreen() {
             textColor="#FFF"
             onPress={() => router.push("/CreateAccountScreen")}
           />
-          <LongButton text="Login" color="#20293d" textColor="#FFF" />
+          <LongButton
+            text="Login"
+            color="#20293d"
+            textColor="#FFF"
+            onPress={() => router.push("/LoginScreen")}
+          />
         </View>
       </View>
     </View>
@@ -44,6 +49,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     gap: 20,
   },
-  body: { flexDirection: "column" },
+  body: { flexDirection: "column", padding: 15 },
   logo: { alignItems: "center" },
 });

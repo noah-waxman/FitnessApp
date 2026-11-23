@@ -5,8 +5,7 @@ import {
   type StateStorage,
 } from "zustand/middleware";
 import * as SecureStore from "expo-secure-store";
-
-const API_URL = "https://localhost";
+import { loginAccount } from "../api";
 
 const secureStorage: StateStorage = {
   getItem: (name) => SecureStore.getItemAsync(name),
@@ -14,10 +13,12 @@ const secureStorage: StateStorage = {
   removeItem: (name) => SecureStore.deleteItemAsync(name),
 };
 
+type SignInResult = { success: true } | { success: false; error: string };
+
 type AuthState = {
   token: string | null;
-  hasHydrated: boolean; // true once the saved token has been loaded
-  signIn: (email: string, password: string) => Promise<void>;
+  hasHydrated: boolean;
+  signIn: (email: string, password: string) => Promise<SignInResult>;
   signOut: () => void;
 };
 
@@ -27,23 +28,21 @@ export const useAuthStore = create<AuthState>()(
       token: null,
       hasHydrated: false,
 
-      signIn: async (email: string, password: string) => {
-        const res = await fetch(`${API_URL}/auth/login`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password }),
-        });
-        if (!res.ok) throw new Error("Login failed");
-        const data = await res.json();
-        set({ token: data.token });
+      signIn: async (email, password) => {
+        const result = await loginAccount(email, password);
+        if (!result.success) {
+          return { success: false, error: result.error };
+        }
+        set({ token: result.token });
+        return { success: true };
       },
 
       signOut: () => set({ token: null }),
     }),
     {
-      name: "auth", // key used in SecureStore
+      name: "auth",
       storage: createJSONStorage(() => secureStorage),
-      partialize: (state) => ({ token: state.token }), // only save the token
+      partialize: (state) => ({ token: state.token }),
       onRehydrateStorage: () => () => {
         useAuthStore.setState({ hasHydrated: true });
       },

@@ -2,9 +2,11 @@ package com.logit.logitapi.controllers;
 
 import java.time.Instant;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
@@ -39,13 +41,21 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public Map<String, Object> login(@RequestBody LoginRequest req) {
-        User u = userRepo.findByEmail(req.getEmail())
-            .filter(found -> passwordEncoder.matches(req.getPassword(), found.getPasswordHash()))
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid email or password"));
+    public ResponseEntity<?> login(@RequestBody LoginRequest req) {
+        Optional<User> found = userRepo.findByEmail(req.getEmail());
 
+        boolean valid = found.isPresent()
+            && passwordEncoder.matches(req.getPassword(), found.get().getPasswordHash());
+
+        if (!valid) {
+            return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(Map.of("error", "Invalid email or password"));
+        }
+
+        User u = found.get();
         UserResponse user = new UserResponse(u.getId(), u.getEmail(), u.getTimezone());
-        return Map.of("accessToken", issueToken(u.getId()), "user", user);
+        return ResponseEntity.ok(Map.of("accessToken", issueToken(u.getId()), "user", user));
     }
 
     @GetMapping("/me")

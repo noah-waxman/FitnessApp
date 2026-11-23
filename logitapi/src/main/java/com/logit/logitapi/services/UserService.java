@@ -37,12 +37,12 @@ public class UserService {
     }
 
     public UserResponse createUser(String email, String password, String timezone) {
-        if (userRepo.existsByEmail(email)) {
+        if (userRepo.existsByEmail(email.trim().toLowerCase())) {
             throw new EmailAlreadyExistsException("Email already exists");
         }
 
         User user = new User();
-        user.setEmail(email);
+        user.setEmail(email.trim().toLowerCase());
         user.setPasswordHash(encoder.encode(password));
         user.setTimezone(timezone);
         userRepo.save(user);
