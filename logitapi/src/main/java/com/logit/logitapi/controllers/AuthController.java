@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwsHeader;
@@ -20,6 +21,8 @@ import com.logit.logitapi.requests.LoginRequest;
 import com.logit.logitapi.requests.RegisterRequest;
 import com.logit.logitapi.responses.UserResponse;
 import com.logit.logitapi.services.UserService;
+
+import org.springframework.security.oauth2.jwt.Jwt;
 
 @RestController
 @RequestMapping("/auth")
@@ -43,6 +46,14 @@ public class AuthController {
 
         UserResponse user = new UserResponse(u.getId(), u.getEmail(), u.getTimezone());
         return Map.of("accessToken", issueToken(u.getId()), "user", user);
+    }
+
+    @GetMapping("/me")
+    public UserResponse me(@AuthenticationPrincipal Jwt jwt) {
+        Long userId = Long.valueOf(jwt.getSubject());
+        User u = userRepo.findById(userId)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User no longer exists"));
+        return new UserResponse(u.getId(), u.getEmail(), u.getTimezone());
     }
 
     private String issueToken(Long userId) {

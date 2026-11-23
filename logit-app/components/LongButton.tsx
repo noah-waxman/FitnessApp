@@ -5,14 +5,14 @@ type LongButtonProps = {
   text: string;
   color: string;
   textColor: string;
-  onClick?: () => void;
+  onPress?: () => void;
 };
 
 export default function LongButton({
   text,
   color,
   textColor,
-  onClick,
+  onPress,
 }: LongButtonProps) {
   const scale = useRef(new Animated.Value(1)).current;
 
@@ -35,7 +35,7 @@ export default function LongButton({
   };
 
   return (
-    <Pressable onPressIn={pressIn} onPressOut={pressOut} onClick={onClick}>
+    <Pressable onPressIn={pressIn} onPressOut={pressOut} onPress={onPress}>
       <Animated.View
         style={[
           styles.button,

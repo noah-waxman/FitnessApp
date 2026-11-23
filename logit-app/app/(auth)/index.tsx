@@ -1,10 +1,12 @@
-import { Text, View, StyleSheet, Platform, Animated } from "react-native";
+import { View, StyleSheet, Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import LongButton from "./LongButton";
-import AppLogo from "./AppLogo";
+import { useRouter } from "expo-router";
+import LongButton from "../../components/LongButton";
+import AppLogo from "../../components/AppLogo";
 
 export default function LoginRegisterScreen() {
   const insets = useSafeAreaInsets();
+  const router = useRouter();
 
   return (
     <View
@@ -20,7 +22,12 @@ export default function LoginRegisterScreen() {
           <AppLogo size={240} />
         </View>
         <View style={styles.buttons}>
-          <LongButton text="Create Account" color="#175DDC" textColor="#FFF" />
+          <LongButton
+            text="Create Account"
+            color="#175DDC"
+            textColor="#FFF"
+            onPress={() => router.push("/CreateAccountScreen")}
+          />
           <LongButton text="Login" color="#20293d" textColor="#FFF" />
         </View>
       </View>
