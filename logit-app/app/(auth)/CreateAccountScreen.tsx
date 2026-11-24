@@ -94,7 +94,7 @@ export default function CreateAccountScreen() {
               text="Back"
               color={colors.Text4}
               textColor="#FFF"
-              onPress={() => router.back()}
+              onPress={() => router.replace("/")}
             />
             <LongButton
               style={styles.createButton}

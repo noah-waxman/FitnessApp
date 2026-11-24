@@ -29,6 +29,10 @@ export default function LoginScreen() {
       emailFromRegistration: string;
     }>();
 
+  const [showSuccess, setShowSuccess] = useState(
+    successfulRegistration === "true",
+  );
+
   useEffect(() => {
     if (emailFromRegistration && emailFromRegistration.trim().length > 0) {
       setEmail(emailFromRegistration.trim());
@@ -39,6 +43,7 @@ export default function LoginScreen() {
     const result = await signIn(email, password);
     if (!result.success) {
       setError(result.error);
+      setShowSuccess(false);
     }
   };
 
@@ -86,7 +91,7 @@ export default function LoginScreen() {
             value={password}
             onChangeText={setPassword}
           />
-          {successfulRegistration === "true" && (
+          {showSuccess === true && (
             <Animated.View
               entering={FadeIn.duration(150)}
               style={styles.successBox}
@@ -110,7 +115,7 @@ export default function LoginScreen() {
               text="Back"
               color={colors.Text4}
               textColor="#FFF"
-              onPress={() => router.back()}
+              onPress={() => router.replace("/")}
             />
             <LongButton
               style={styles.createButton}
