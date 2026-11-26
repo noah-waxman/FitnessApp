@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView, Button } from "react-native";
 import { globalStyles } from "../../../globalStyles";
 import { useAuthStore } from "../../../stores/auth";
 import LongButton from "../../../components/LongButton";

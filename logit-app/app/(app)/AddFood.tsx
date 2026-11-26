@@ -10,6 +10,7 @@ import LongButton from "../../components/LongButton";
 
 export default function AddFood() {
   const insets = useSafeAreaInsets();
+  const [footerHeight, setFooterHeight] = useState(0);
 
   const [name, setName] = useState<string>("");
   const [brand, setBrand] = useState<string>("");
@@ -20,7 +21,13 @@ export default function AddFood() {
   return (
     <View style={[globalStyles.defaultContainer, { paddingTop: insets.top }]}>
       <AppText style={styles.title}>Add Food</AppText>
-      <KeyboardAwareScrollView keyboardShouldPersistTaps="handled">
+      <KeyboardAwareScrollView
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{ paddingBottom: 20 }}
+        bottomOffset={20}
+        extraKeyboardSpace={-footerHeight}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.card}>
           <TextInputField
             label="Name"
@@ -67,12 +74,16 @@ export default function AddFood() {
           ></TextInputField>
         </View>
       </KeyboardAwareScrollView>
-      <View style={[{ paddingBottom: insets.bottom }]}>
-        <LongButton
-          text="Save Food"
-          color="#175DDC"
-          textColor="#FFF"
-        ></LongButton>
+      <View
+        onLayout={(e) => setFooterHeight(e.nativeEvent.layout.height)}
+        style={{
+          paddingBottom: insets.bottom,
+          paddingTop: 10,
+          borderTopWidth: StyleSheet.hairlineWidth,
+          borderTopColor: colors.SurfaceNav,
+        }}
+      >
+        <LongButton text="Save Food" color="#175DDC" textColor="#FFF" />
       </View>
     </View>
   );

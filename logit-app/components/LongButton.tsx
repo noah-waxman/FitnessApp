@@ -15,6 +15,7 @@ type LongButtonProps = {
   radius?: number;
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
+  disabled?: boolean;
 };
 
 export default function LongButton({
@@ -24,10 +25,12 @@ export default function LongButton({
   radius = 10,
   onPress,
   style,
+  disabled = false,
 }: LongButtonProps) {
   const scale = useRef(new Animated.Value(1)).current;
 
   const pressIn = () => {
+    if (disabled) return;
     Animated.spring(scale, {
       toValue: 0.96,
       speed: 40,
@@ -38,7 +41,7 @@ export default function LongButton({
 
   const pressOut = () => {
     Animated.spring(scale, {
-      toValue: 0.96,
+      toValue: 1,
       speed: 50,
       bounciness: 0,
       useNativeDriver: true,
@@ -50,6 +53,9 @@ export default function LongButton({
       onPressIn={pressIn}
       onPressOut={pressOut}
       onPress={onPress}
+      disabled={disabled}
+      accessibilityRole="button"
+      accessibilityState={{ disabled }}
       style={style}
     >
       <Animated.View
@@ -59,6 +65,7 @@ export default function LongButton({
             backgroundColor: color,
             borderRadius: radius,
             transform: [{ scale }],
+            opacity: disabled ? 0.5 : 1,
           },
         ]}
       >
