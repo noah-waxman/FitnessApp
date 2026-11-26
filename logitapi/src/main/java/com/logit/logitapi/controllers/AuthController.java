@@ -42,7 +42,8 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest req) {
-        Optional<User> found = userRepo.findByEmail(req.getEmail());
+        String email = req.getEmail().trim().toLowerCase();
+        Optional<User> found = userRepo.findByEmail(email);
 
         boolean valid = found.isPresent()
             && passwordEncoder.matches(req.getPassword(), found.get().getPasswordHash());

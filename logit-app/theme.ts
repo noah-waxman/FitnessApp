@@ -1,6 +1,8 @@
 export const colors = {
   background: "#111827",
   SurfaceInput: "#1A2130",
+  SurfaceNav: "#161E2E",
+  BorderSubtle: "#232C3F",
   BorderStrong: "#3A4256",
   BorderFocused: "#6C9EFF",
   TextPrimary: "#F3F5F9",

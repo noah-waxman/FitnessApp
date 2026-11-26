@@ -1,6 +1,7 @@
 package com.logit.logitapi.services;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,33 @@ public class FoodLogEntryService {
     @Autowired
     private FoodLogEntryRepo foodLogEntryRepo;
 
-    public List<FoodLogEntry> findAll() {
-        return foodLogEntryRepo.findAll();
+    public List<FoodLogEntryResponse> findAll() {
+        return foodLogEntryRepo.findAll().stream()
+            .map(this::toResponse)
+            .toList();
+    }
+
+    private FoodLogEntryResponse toResponse(FoodLogEntry saved) {
+        return new FoodLogEntryResponse(
+            saved.getId(),
+            saved.getLogDate(),
+            saved.getMealType(),
+            saved.getFood() != null ? saved.getFood().getId() : null,
+            saved.getFoodServingUnit() != null ? saved.getFoodServingUnit().getId() : null,
+            saved.getDescription(),
+            saved.getQuantity(),
+            saved.getUnitName(),
+            saved.getCalories(),
+            saved.getProtein(),
+            saved.getCarbs(),
+            saved.getFat()
+        );
+    }
+
+    public List<FoodLogEntryResponse> findByUserAndDate(Long userId, LocalDate logDate) {
+        return foodLogEntryRepo.findByUserIdAndLogDate(userId, logDate).stream()
+            .map(this::toResponse)
+            .toList();
     }
 
     public FoodLogEntryResponse createFoodLogEntry(CreateFoodLogEntryRequest request) {
